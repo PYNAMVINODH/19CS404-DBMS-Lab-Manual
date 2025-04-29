@@ -105,87 +105,159 @@ CREATE TABLE Table_Name (
 
 **Question 1**
 --
--- Paste Question 1 here
+-- Create a table named Attendance with the following constraints:
+
+    AttendanceID as INTEGER should be the primary key.
+    
+    EmployeeID as INTEGER should be a foreign key referencing Employees(EmployeeID).
+    
+    AttendanceDate as DATE.
+    
+    Status as TEXT should be one of 'Present', 'Absent', 'Leave'.
 
 ```sql
--- Paste your SQL code below for Question 1
+  CREATE TABLE Attendance (AttendanceID INTEGER PRIMARY KEY, EmployeeID INTEGER , AttendanceDate DATE, Status TEXT CHECK(Status IN('Present','Absent','Leave')), FOREIGN KEY (EmployeeID) 
+  REFERENCES Employees(EmployeeID));
 ```
 
 **Output:**
 
-![Output1](output.png)
+![image](https://github.com/user-attachments/assets/f7c3a46c-8141-452f-b2d9-e52460b3daaa)
+
 
 **Question 2**
 ---
--- Paste Question 2 here
+--Create a table named Events with the following columns:
+
+    EventID as INTEGER
+    
+    EventName as TEXT
+    
+    EventDate as DATE
+
 
 ```sql
--- Paste your SQL code below for Question 2
+  --CREATE TABLE Events (
+      EventID INTEGER,
+      EventName TEXT,
+      EventDate DATE
+  );
 ```
 
 **Output:**
 
-![Output2](output.png)
+![image](https://github.com/user-attachments/assets/8065c8a5-d9f9-47e5-8584-98b8150c3ef6)
+
 
 **Question 3**
 ---
--- Paste Question 3 here
+-- Insert all customers from Old_customers into Customers
+
+
+    Table attributes are CustomerID, Name, Address, Email
 
 ```sql
--- Paste your SQL code below for Question 3
+-- INSERT INTO Customers (CustomerID, Name, Address, Email)
+   SELECT CustomerID, Name, Address, Email FROM Old_customers;
 ```
 
 **Output:**
 
-![Output3](output.png)
+![image](https://github.com/user-attachments/assets/3a66a53a-cfd2-4b73-8fa6-2d3e834d168e)
+
 
 **Question 4**
 ---
--- Paste Question 4 here
+-- Create a new table named item with the following specifications and constraints:
 
-```sql
--- Paste your SQL code below for Question 4
+    item_id as TEXT and as primary key.
+    
+    item_desc as TEXT.
+    
+    rate as INTEGER.
+    
+    icom_id as TEXT with a length of 4.
+    
+    icom_id is a foreign key referencing com_id in the company table.
+    
+    The foreign key should set NULL on updates and deletes.
+    
+    item_desc and rate should not accept NULL.
+ ```sql
+-- CREATE TABLE item(
+    item_id TEXT PRIMARY KEY,
+    item_desc TEXT NOT NULL,
+    rate INTEGER NOT NULL,
+    icom_id TEXT CHECK(LENGTH(icom_id) = 4),
+    FOREIGN KEY (icom_id) REFERENCES company(com_id)
+     ON UPDATE SET NULL
+     ON DELETE SET NULL
+);
 ```
 
 **Output:**
 
-![Output4](output.png)
+![image](https://github.com/user-attachments/assets/2a71ea3b-17d3-4e06-9358-9e463519f73c)
+
 
 **Question 5**
 ---
--- Paste Question 5 here
+-- Write an SQL query to add two new columns, department_id and manager_id, to the table employee with datatype of INTEGER. The manager_id column should have a default value of NULL.
+
+
 
 ```sql
--- Paste your SQL code below for Question 5
+-- ALTER TABLE employee ADD department_id INTEGER;
+ALTER TABLE employee ADD manager_id INTEGER DEFAULT NULL;
 ```
 
 **Output:**
 
-![Output5](output.png)
+![image](https://github.com/user-attachments/assets/9ea20553-6c23-447e-9ed5-457658353634)
+
 
 **Question 6**
 ---
--- Paste Question 6 here
+-- Insert the below data into the Student_details table, allowing the Subject and MARKS columns to take their default values.
+
+RollNo        Name             Gender      
+----------    ------------     ----------  
+204           Samuel Black        M          
+
+Note: The Subject and MARKS columns will use their default values.
 
 ```sql
--- Paste your SQL code below for Question 6
+-- INSERT INTO Student_details(RollNo,Name,Gender)
+VALUES (204,'Samuel Black', 'M');
 ```
 
 **Output:**
 
-![Output6](output.png)
+![image](https://github.com/user-attachments/assets/d20d30f9-57a2-48c4-9c8c-bb1d7c741cac)
+
 
 **Question 7**
 ---
--- Paste Question 7 here
+-- Create a table named Department with the following constraints:
+
+    DepartmentID as INTEGER should be the primary key.
+    
+    DepartmentName as TEXT should be unique and not NULL.
+    
+    Location as TEXT.
 
 ```sql
--- Paste your SQL code below for Question 7
+-- CREATE TABLE Department(
+    DepartmentID INTEGER PRIMARY KEY,
+    DepartmentName TEXT UNIQUE NOT NULL,
+    Location TEXT
+);
 ```
 
 **Output:**
 
-![Output7](output.png)
+![image](https://github.com/user-attachments/assets/7d5bdedb-9c46-46bb-b70e-f4df9711ec6d)
+
 
 **Question 8**
 ---
@@ -201,15 +273,33 @@ CREATE TABLE Table_Name (
 
 **Question 9**
 ---
--- Paste Question 9 here
+-- Create a table named Invoices with the following constraints:
+
+    InvoiceID as INTEGER should be the primary key.
+    
+    InvoiceDate as DATE.
+    
+    Amount as REAL should be greater than 0.
+    
+    DueDate as DATE should be greater than the InvoiceDate.
+    
+    OrderID as INTEGER should be a foreign key referencing Orders(OrderID).
 
 ```sql
--- Paste your SQL code below for Question 9
+-- CREATE TABLE Invoices(
+    InvoiceID INTEGER PRIMARY KEY,
+    InvoiceDate DATE,
+    Amount REAL CHECK((Amount) > 0),
+    DueDate DATE CHECK((DueDate)>(InvoiceDate)),
+    OrderID INTEGER ,
+    FOREIGN KEY (OrderID) REFERENCES Orders(OrderID)
+);
 ```
 
 **Output:**
 
-![Output9](output.png)
+![image](https://github.com/user-attachments/assets/078ddecd-3f63-4e80-95cf-c38afac44ca8)
+
 
 **Question 10**
 ---
