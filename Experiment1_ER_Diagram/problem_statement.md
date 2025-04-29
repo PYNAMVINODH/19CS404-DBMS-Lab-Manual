@@ -8,8 +8,6 @@ The purpose of this workshop is to gain hands-on experience in designing ER diag
 
 ---
 
-## 🧪 Choose One Scenario:
-
 ### 🔹 Scenario 1: University Database
 Design a database to manage students, instructors, programs, courses, and student enrollments. Include prerequisites for courses.
 
@@ -35,38 +33,67 @@ Design a database for patient management, appointments, medical records, and bil
 
 ---
 
-## 📝 Tasks:
-1. Identify entities, relationships, and attributes.
-2. Draw the ER diagram using any tool (draw.io, dbdiagram.io, hand-drawn and scanned).
-3. Include:
-   - Cardinality & participation constraints
-   - Prerequisites for University OR Billing for Hospital
-4. Explain:
-   - Why you chose the entities and relationships.
-   - How you modeled prerequisites or billing.
-
-# ER Diagram Submission - Student Name
+# ER Diagram Submission - JOHN CHRISTOBER T
 
 ## Scenario Chosen:
-University / Hospital (choose one)
+University
 
 ## ER Diagram:
-![ER Diagram](er_diagram.png)
+![image](https://github.com/user-attachments/assets/b1b50efd-750e-40fa-8289-7f02a1d39254)
+
 
 ## Entities and Attributes:
-- Entity1: Attributes
-- Entity2: Attributes
-...
+Student
+Attributes: Register No (Primary Key), Name, Subjects Enrolled, Mobile No, Mail ID
+
+Department
+Attributes: Dept ID (Primary Key), Dept Name
+
+Programs
+Attributes: Program Code (Primary Key), Program Name, Subjects
+
+University
+Attributes: University ID (Primary Key), University Name, Students and Faculties
+
+Instructors
+Attributes: Instructor ID (Primary Key), Name, Subject
+
+Courses
+Attributes: Course Code (Primary Key), Course Name, Credits, Instructor Handling
 
 ## Relationships and Constraints:
-- Relationship1 (Cardinality, Participation)
-- Relationship2 (Cardinality, Participation)
-...
+In a (Between Student and Department)
+Cardinality: M:N
+Participation: Total (implied for both)
 
-## Extension (Prerequisite / Billing):
-- Explain how you modeled prerequisites or billing.
+Provides (Between Department and Programs)
+Cardinality: M:N
+Participation: Partial
+
+Contains (Between Programs and Courses)
+Cardinality: M:N
+Participation: Total for Courses (implied)
+
+Enrolls in (Between Student and Courses)
+Cardinality: M:N
+Participation: Total for Students (every student must enroll in at least one course)
+
+Teaches (Between Instructors and Courses)
+Cardinality: 1:N
+Participation: Total for Instructors, Partial for Courses
+
+Has (Between University and Student, and University and Instructors)
+Cardinality: 1:N
+Participation: Total for Students and Instructors
 
 ## Design Choices:
-Brief explanation of why you chose certain entities, relationships, and assumptions
+Normalization: Each logical entity has its own table (e.g., Student, Instructor, Courses), reducing redundancy.
+
+Modular design: Department acts as a bridge between students and programs, reflecting real academic structures.
+
+M:N Relationships: Used to allow flexibility—e.g., students enrolled in multiple departments or courses.
+
+Scalability: Supports future expansions like new departments, courses, or programs.
 
 ## RESULT
+A complete ER model of a university system that defines students, courses, professors, and their interrelationships, including prerequisites, with proper constraints and rationale.
