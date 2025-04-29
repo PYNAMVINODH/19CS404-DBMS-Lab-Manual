@@ -105,123 +105,139 @@ CREATE TABLE Table_Name (
 
 **Question 1**
 --
--- Paste Question 1 here
+-- ![image](https://github.com/user-attachments/assets/a6b8b2ca-0327-4f4d-b87c-4a6da1dca18a)
+
 
 ```sql
--- Paste your SQL code below for Question 1
+-- create table Department(DepartmentID INTEGER primary key,DepartmentName TEXT UNIQUE not null,Location TEXT);
 ```
 
 **Output:**
+![image](https://github.com/user-attachments/assets/eb80e91c-7160-4af5-8e14-86799d4b0611)
 
-![Output1](output.png)
 
 **Question 2**
 ---
--- Paste Question 2 here
+-- ![image](https://github.com/user-attachments/assets/083ba578-c023-47c0-96ba-af7dd2eb6d94)
+
 
 ```sql
--- Paste your SQL code below for Question 2
+-- create table Shipments(ShipmentID INTEGER primary key,ShipmentDate DATE,SupplierID INTEGER,OrderID INTEGER,foreign key(SupplierID)references Suppliers(SupplierID),foreign key(OrderID)references Orders(OrderID));
 ```
 
 **Output:**
 
-![Output2](output.png)
+![image](https://github.com/user-attachments/assets/765c33a0-47f7-4aa3-a737-723fc218d879)
+
 
 **Question 3**
 ---
--- Paste Question 3 here
+-- ![image](https://github.com/user-attachments/assets/d0a0f908-e16a-4842-972e-26755287002f)
+
 
 ```sql
--- Paste your SQL code below for Question 3
+-- insert into Customers select*from Old_customers;
 ```
 
 **Output:**
 
-![Output3](output.png)
+![image](https://github.com/user-attachments/assets/0d0305b1-fd05-4292-b443-769c99b915a6)
+
 
 **Question 4**
 ---
--- Paste Question 4 here
+-- ![image](https://github.com/user-attachments/assets/e93f7652-de1a-4afc-b5da-7e69ac75abb5)
+
 
 ```sql
--- Paste your SQL code below for Question 4
+-- insert into Customers(CustomerID,Name,Address) values(306,'Diana Prince','Themyscira');
+insert into Customers(CustomerID,Name,Address,City,Zipcode) values (307,'Bruce Wayne','Wayne Mano','Gotham',10007);
+insert into Customers(CustomerID,Name,Address,Zipcode)values(308,'Peter Parker','Queens',11375);
 ```
 
 **Output:**
 
-![Output4](output.png)
+![image](https://github.com/user-attachments/assets/4a808f3e-af48-4a24-ab75-6c6e9e6845dc)
+
 
 **Question 5**
 ---
--- Paste Question 5 here
+-- ![image](https://github.com/user-attachments/assets/a9a4ddb5-d05e-4b98-8b18-cfa73d7a12f1)
+
 
 ```sql
--- Paste your SQL code below for Question 5
+-- insert into Employee(EmployeeID,Name,Position,Department,Salary) values(001,'Sarah Parker','Manager','HR',60000);
 ```
 
 **Output:**
 
-![Output5](output.png)
+![image](https://github.com/user-attachments/assets/9b79570c-d883-4b84-ae19-798195f9ae0f)
+
 
 **Question 6**
 ---
--- Paste Question 6 here
+--![image](https://github.com/user-attachments/assets/dd5c1a42-dd7f-45c1-8a18-484305f9c41c)
+
 
 ```sql
--- Paste your SQL code below for Question 6
+-- alter table employee add department_id INTEGER;
+alter table employee add manager_id INTEGER default NULL;
 ```
 
 **Output:**
 
-![Output6](output.png)
+![image](https://github.com/user-attachments/assets/66799351-47af-46c7-ac5d-95d5f3c1db92)
 
 **Question 7**
 ---
--- Paste Question 7 here
+-- ![image](https://github.com/user-attachments/assets/585aabdf-13da-4f75-8c15-6824177805b5)
 
 ```sql
--- Paste your SQL code below for Question 7
+-- create table Tasks(TaskID INTEGER,TaskName TEXT,DueDate DATE);
 ```
 
 **Output:**
 
-![Output7](output.png)
+![image](https://github.com/user-attachments/assets/eb8c6643-a435-4fb1-8225-84a1467d4ada)
 
 **Question 8**
 ---
--- Paste Question 8 here
+-- ![image](https://github.com/user-attachments/assets/c0217d70-886b-468a-a34b-4ccd529d1f24)
 
 ```sql
--- Paste your SQL code below for Question 8
+-- create table jobs(job_id INTEGER,job_title TEXT default '',min_salary INTEGER default '8000',max_salary INTEGER default NULL);
 ```
 
 **Output:**
 
-![Output8](output.png)
+![image](https://github.com/user-attachments/assets/656a4be0-02b7-4340-aded-f4c68057a54e)
 
 **Question 9**
 ---
--- Paste Question 9 here
+-- ![image](https://github.com/user-attachments/assets/3109e51f-d9ec-4619-9a67-582b28daa600)
+
 
 ```sql
--- Paste your SQL code below for Question 9
+-- alter table employee add designation varchar(50);
 ```
 
 **Output:**
 
-![Output9](output.png)
+![image](https://github.com/user-attachments/assets/fff871af-57ad-45b3-bbd5-a5cbd34bac94)
+
 
 **Question 10**
 ---
--- Paste Question 10 here
+-- ![image](https://github.com/user-attachments/assets/cc6af063-b3be-4be3-807c-c03d9edbb85f)
+
 
 ```sql
--- Paste your SQL code below for Question 10
+-- create table Invoices(InvoiceID INTEGER primary key,InvoiceDate date,Amount real,DueDate date,OrderID INTEGER,check(Amount>0),check(DueDate>InvoiceDate),foreign key(OrderID)references Orders(OrderID));
 ```
 
 **Output:**
 
-![Output10](output.png)
+![image](https://github.com/user-attachments/assets/a7e2d0dd-6990-4788-b081-b9359cc03623)
 
 
 ## RESULT
