@@ -38,377 +38,192 @@ DROP VIEW view_name;
 
 **Question 1**
 --
--- 
-From the following tables write a SQL query to count the number of customers with grades above the average in New York City. Return grade and count.
-
-customer table
-
-    name         type
-    -----------  ----------
-    customer_id  int
-    cust_name    text
-    city         text
-    grade        int
-    salesman_id  int
-    For example:
-    
-    Result
-    grade       COUNT(*)
-    ----------  ----------
-    300         2
-
-```sql
--- 
-SELECT grade, COUNT(*) 
-FROM customer 
-WHERE grade > (
-    SELECT AVG(grade) 
-    FROM customer 
-    WHERE city = 'New York'
-)
-GROUP BY grade;
-
-```
-
-**Output:**
-
-![image](https://github.com/user-attachments/assets/e79860f6-41a1-4271-af5e-25a2a59d219c)
-
-
-**Question 2**
----
--- 
-From the following tables write a SQL query to find salespeople who had more than one customer. Return salesman_id and name.
-
-salesman table
-    
-    name                 type
-    ---------------   ---------------
-    salesman_id       numeric(5)
-    name                  varchar(30)
-    city                     varchar(15)
-    commission       decimal(5,2)
-    
-    customer table
-    
-    name              type
-    -----------       ----------
-    customer_id   int
-    cust_name     text
-    city                text
-    grade            int
-    salesman_id  int
-    
-    For example:
-    
-    Result
-    salesman_id  name
-    -----------  ----------
-    5001         James Hoog
-    5002         Nail Knite
-
-```sql
--- 
-SELECT s.salesman_id, s.name
-FROM salesman s
-JOIN customer c ON s.salesman_id = c.salesman_id
-GROUP BY s.salesman_id, s.name
-HAVING COUNT(*) > 1;
-
-```
-
-**Output:**
-
-![image](https://github.com/user-attachments/assets/6181fd89-626f-4dad-97a9-9d70a346d905)
-
-
-**Question 3**
----
--- 
-From the following tables write a SQL query to find the order values greater than the average order value of 10th October 2012. Return ord_no, purch_amt, ord_date, customer_id, salesman_id.
-
-Note: date should be yyyy-mm-dd format
-
-ORDERS TABLE
-    
-    name            type
-    ----------     ----------
-    ord_no          int
-    purch_amt    real
-    ord_date       text
-    customer_id  int
-    salesman_id  int
-    
-    For example:
-    
-    Result
-    ord_no      purch_amt   ord_date    customer_id  salesman_id
-    ----------  ----------  ----------  -----------  -----------
-    70005       2400.6      2012-07-27  3007         5001
-    70008       5760.0      2012-09-10  3002         5001
-    70003       2480.4      2012-10-10  3009         5003
-    70013       3045.6      2012-04-25  3002         5001
+-- ![Screenshot 2025-04-29 140920](https://github.com/user-attachments/assets/e9bb55a0-ef1c-49e5-9d77-9c147822d3f3)
 
 
 ```sql
--- 
-SELECT ord_no, purch_amt, ord_date, customer_id, salesman_id
-FROM orders
-WHERE purch_amt > (
-    SELECT AVG(purch_amt)
-    FROM orders
-    WHERE ord_date = '2012-10-10'
-);
-
-
-```
-
-**Output:**
-
-![image](https://github.com/user-attachments/assets/cd897e68-306d-4af0-a743-cad588d551df)
-
-
-**Question 4**
----
--- 
-Write a SQL query to retrieve all columns from the CUSTOMERS table for customers whose Address as Delhi and age below 30
-
-Sample table: CUSTOMERS
-    
-    ID          NAME        AGE         ADDRESS     SALARY
-    ----------  ----------  ----------  ----------  ----------
-    
-    1          Ramesh     32              Ahmedabad     2000
-    2          Khilan        25              Delhi                 1500
-    3          Kaushik      23              Kota                  2000
-    4          Chaitali       25             Mumbai            6500
-    5          Hardik        27              Bhopal              8500
-    6          Komal         22              Hyderabad       4500
-    
-    7           Muffy          24              Indore            10000
-    
-     
-     
-    
-    For example:
-    
-    Result
-    ID          NAME        AGE         ADDRESS     SALARY
-    ----------  ----------  ----------  ----------  ----------
-    2           Khilan      25          Delhi       1500
-
-```sql
--- 
-SELECT * 
-FROM CUSTOMERS
-WHERE TRIM(UPPER(ADDRESS)) = 'DELHI'
-  AND AGE < 30
-ORDER BY ID ASC;
-
-```
-
-**Output:**
-
-![image](https://github.com/user-attachments/assets/3e53d1cc-d23c-49e4-8159-7f6da82ab00f)
-
-
-**Question 5**
----
--- 
-
-Write a SQL query to retrieve all columns from the CUSTOMERS table for customers whose salary is greater than $1500.
-
-Sample table: CUSTOMERS
-    
-    ID          NAME        AGE         ADDRESS     SALARY
-    ----------  ----------  ----------  ----------  ----------
-    
-    1          Ramesh     32              Ahmedabad     2000
-    2          Khilan        25              Delhi                 1500
-    3          Kaushik      23              Kota                  2000
-    4          Chaitali       25             Mumbai            6500
-    5          Hardik        27              Bhopal              8500
-    6          Komal         22              Hyderabad       4500
-    
-    7           Muffy          24              Indore            10000
-    
-     
-     
-    
-    For example:
-    
-    Result
-    ID          NAME        AGE         ADDRESS     SALARY
-    ----------  ----------  ----------  ----------  ----------
-    1           Ramesh      32          Ahmedabad   2000
-    3           Kaushik     23          Kota        2000
-    4           Chaitali    25          Mumbai      6500
-    5           Hardik      27          Bhopal      8500
-    6           Komal       22          Hyderabad   4500
-    7           Muffy       24          Indore      10000
-```sql
--- 
-SELECT * 
-FROM CUSTOMERS 
-WHERE SALARY > 1500;
-
-```
-
-**Output:**
-
-![image](https://github.com/user-attachments/assets/659470b2-b99e-431f-9def-ae45afe34a1b)
-
-
-**Question 6**
----
--- 
-Write a SQL query that retrieves the all the columns from the Table Grades, where the grade is equal to the minimum grade achieved in each subject.
-
-Sample table: GRADES (attributes: student_id, student_name, subject, grade)
-
-![image](https://github.com/user-attachments/assets/be111da2-2a21-4e9d-8a7e-f510c8670ddc)
-
-
-    
-    For example:
-    
-    Result
-    student_id       student_name     subject          grade
-    ---------------  ---------------  ---------------  ---------------
-    2                Bob              Math             85
-    6                Frank            Science          85
-    7                John             Social           85
-
-```sql
--- 
-SELECT * 
-FROM GRADES g
+-- SELECT * 
+FROM Grades g
 WHERE grade = (
-    SELECT MIN(grade)
-    FROM GRADES
+    SELECT MAX(grade)
+    FROM Grades
     WHERE subject = g.subject
 );
 
 ```
 
 **Output:**
+![Screenshot 2025-04-29 140926](https://github.com/user-attachments/assets/82dfbc89-4071-41b5-9b0c-8b6b5dbd7ebd)
 
-![image](https://github.com/user-attachments/assets/1c21bd7c-5606-423b-8d8e-635156029a88)
 
 
-**Question 7**
+**Question 2**
 ---
---  7QUE
- 
+-- ![Screenshot 2025-04-29 141038](https://github.com/user-attachments/assets/93d0cd11-d5c2-4f23-b08b-4a9dcbef4e7d)
+
 
 ```sql
--- Paste your SQL code below for Question 7
+-- SELECT o.ord_no, o.purch_amt, o.ord_date, o.customer_id, o.salesman_id
+FROM ORDERS o
+JOIN SALESMAN s ON o.salesman_id = s.salesman_id
+WHERE s.city = 'New York';
+
 ```
 
 **Output:**
+![Screenshot 2025-04-29 141048](https://github.com/user-attachments/assets/96d7ce09-5ca6-49cd-8b21-0bceb8072347)
 
-![Output7](output.png)
 
-**Question 8**
+
+**Question 3**
 ---
--- 
-Write a query to display all the customers whose ID is the difference between the salesperson ID of Mc Lyon and 2001.
+-- ![Screenshot 2025-04-29 141156](https://github.com/user-attachments/assets/8cb24975-fdd1-4a13-a21a-0cf8680b04e0)
 
-salesman table
-    
-    name             type
-    ---------------  ---------------
-    salesman_id      numeric(5)
-    name                 varchar(30)
-    city                    varchar(15)
-    commission       decimal(5,2)
-    
-    customer table
-    
-    name         type
-    -----------  ----------
-    customer_id  int
-    cust_name    text
-    city         text
-    grade        int
-    salesman_id  int
-     
-    
-    For example:
-    
-    Result
-    customer_id  cust_name    city        grade       salesman_id
-    -----------  -----------  ----------  ----------  -----------
-    3005         Graham Zusi  California  200         5002
 ```sql
---
-SELECT c.customer_id, c.cust_name, c.city, c.grade, c.salesman_id
-FROM customer c
-WHERE c.customer_id = (
-    SELECT s.salesman_id - 2001
-    FROM salesman s
-    WHERE s.name = 'Mc Lyon'
+-- SELECT g.student_name, g.grade
+FROM GRADES g
+WHERE g.grade = (
+    SELECT MAX(g2.grade)
+    FROM GRADES g2
+    WHERE g2.subject = g.subject
+);
+```
+
+**Output:**
+![Screenshot 2025-04-29 141202](https://github.com/user-attachments/assets/7b5b84f8-edda-4741-b13d-2b51ac4dfcb6)
+
+
+
+**Question 4**
+---
+-- ![Screenshot 2025-04-29 141354](https://github.com/user-attachments/assets/9ff0825e-9c67-4ffe-9e92-3f661c3ded5d)
+
+
+```sql
+-- SELECT name
+FROM customer
+WHERE phone IN (
+    SELECT phone
+    FROM customer
+    GROUP BY phone
+    HAVING COUNT(*) = 1
 );
 
 ```
 
 **Output:**
 
-![image](https://github.com/user-attachments/assets/ee3293bf-9718-4c79-86c9-c9bf800e402b)
+![Screenshot 2025-04-29 141359](https://github.com/user-attachments/assets/6df18253-6313-414f-a52a-e7c6230b5561)
+
+
+**Question 5**
+---
+--![Screenshot 2025-04-29 141459](https://github.com/user-attachments/assets/1dc4420f-645f-40c7-a3ba-1c851cf9cb00)
+
+
+```sql
+-- SELECT *
+FROM CUSTOMERS
+WHERE SALARY > 1500;
+
+```
+
+**Output:**
+
+![Screenshot 2025-04-29 141505](https://github.com/user-attachments/assets/fe0157d8-3868-4632-b0c6-7bf311a43356)
+
+
+**Question 6**
+---
+-- ![Screenshot 2025-04-29 141556](https://github.com/user-attachments/assets/7cb63ea6-499d-4ed3-bfc8-934ede81615b)
+
+
+```sql
+-- SELECT s.salesman_id, s.name
+FROM salesman s
+JOIN customer c ON s.salesman_id = c.salesman_id
+GROUP BY s.salesman_id, s.name
+HAVING COUNT(c.customer_id) > 1;
+
+```
+
+**Output:**
+![Screenshot 2025-04-29 141604](https://github.com/user-attachments/assets/16a84145-3969-4bde-9551-162d462d16f2)
+
+
+
+**Question 7**
+---
+-- ![Screenshot 2025-04-29 141644](https://github.com/user-attachments/assets/ff9b5962-abb0-47c6-bda0-1ac6f4e4120a)
+
+
+```sql
+-- SELECT ord_no, purch_amt, ord_date, customer_id, salesman_id
+FROM orders
+WHERE purch_amt > (
+    SELECT AVG(purch_amt)
+    FROM orders
+    WHERE ord_date = '2012-10-10'
+);
+```
+
+**Output:**
+![Screenshot 2025-04-29 141651](https://github.com/user-attachments/assets/ecb2e288-2a9c-461e-9d1b-da1eb324bb58)
+
+
+
+**Question 8**
+---
+-- ![Screenshot 2025-04-29 141746](https://github.com/user-attachments/assets/96314594-cec5-4bff-96ac-2fcdc0cbd80d)
+
+
+```sql
+-- SELECT *
+FROM customer
+WHERE city <> (
+    SELECT city
+    FROM customer
+    WHERE id = (SELECT MAX(id) FROM customer)
+);
+
+```
+
+**Output:**
+
+![Screenshot 2025-04-29 141758](https://github.com/user-attachments/assets/5e0d0b67-1a11-433a-aa99-6840a129c9c4)
 
 
 **Question 9**
 ---
--- 9QUE
+-- ![Screenshot 2025-04-29 141841](https://github.com/user-attachments/assets/84a903d4-efa6-46ff-9adb-e3ab75e99d54)
+
+
 ```sql
--- Paste your SQL code below for Question 9
+--SELECT *
+FROM CUSTOMERS
+WHERE AGE < 30;
+
 ```
 
 **Output:**
 
-![Output9](output.png)
+![Screenshot 2025-04-29 141850](https://github.com/user-attachments/assets/cdd36191-66d0-48ff-8b73-b9e4541d5d86)
+
 
 **Question 10**
 ---
--- 
-Write a SQL query to retrieve all columns from the CUSTOMERS table for customers whose salary is greater than $4500.
+-- ![Screenshot 2025-04-29 151446](https://github.com/user-attachments/assets/79dfb804-513e-4811-8595-3421250804bf)
 
-Sample table: CUSTOMERS
-    
-    ID          NAME        AGE         ADDRESS     SALARY
-    ----------  ----------  ----------  ----------  ----------
-    
-    1          Ramesh     32              Ahmedabad     2000
-    2          Khilan        25              Delhi                 1500
-    3          Kaushik      23              Kota                  2000
-    4          Chaitali       25             Mumbai            6500
-    5          Hardik        27              Bhopal              8500
-    6          Komal         22              Hyderabad       4500
-    
-    7           Muffy          24              Indore            10000
-    
-     
-     
-    
-    For example:
-    
-    Result
-    ID          NAME        AGE         ADDRESS     SALARY
-    ----------  ----------  ----------  ----------  ----------
-    4           Chaitali    25          Mumbai      6500
-    5           Hardik      27          Bhopal      8500
-    7           Muffy       24          Indore      10000
+
 ```sql
--- 
-SELECT * 
-FROM CUSTOMERS 
-WHERE SALARY > 4500;
-
+-- select medication_id, medication_name, dosage from Medications
+where dosage=(select max(dosage) from Medications)
 ```
 
 **Output:**
 
-![image](https://github.com/user-attachments/assets/bc7788f9-0a4f-41f5-af09-3b70bc7f88da)
+![Screenshot 2025-04-29 151451](https://github.com/user-attachments/assets/e1d4d9ed-731c-4bc3-80b3-124471823ece)
+
 
 
 ## RESULT
