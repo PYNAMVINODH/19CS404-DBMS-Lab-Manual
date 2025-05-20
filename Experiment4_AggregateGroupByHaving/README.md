@@ -108,16 +108,18 @@ LIMIT 1;
 
 **Question 3**
 ---
--- Paste Question 3 here
+--![Screenshot 2025-04-29 131558](https://github.com/user-attachments/assets/d054f243-ab5a-49e1-bdd9-071c29ff5199)
+
 
 ```sql
--- Paste your SQL code below for Question 3
+-- select avg(length(email)) as avg_email_length
+from customer
+order by length(email)
+limit 1;
 ```
 
 **Output:**
-
-![Output3](output.png)
-
+![Screenshot 2025-04-29 131605](https://github.com/user-attachments/assets/c279b3db-a9e8-4dcf-b38a-cd467996b4f9)
 **Question 4**
 ---
 -- 
